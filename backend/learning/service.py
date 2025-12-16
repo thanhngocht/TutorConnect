@@ -18,27 +18,51 @@ ACADEMIC_SERVICE_URL = os.getenv("ACADEMIC_SERVICE_URL", "http://localhost:8003/
 # HELPER: Call Academic Service
 # =========================
 
-def get_session_from_academic(session_id: str) -> Optional[Dict[str, Any]]:
-    """Lấy thông tin session từ Academic service"""
+# def get_session_from_academic(session_id: str) -> Optional[Dict[str, Any]]:
+#     """Lấy thông tin session từ Academic service"""
+#     try:
+#         with httpx.Client(timeout=10.0) as client:
+#             response = client.get(f"{ACADEMIC_SERVICE_URL}/class-sessions/{session_id}")
+#             response.raise_for_status()
+#             return response.json()
+#     except httpx.HTTPError as e:
+#         print(f"Failed to get session from academic service: {e}")
+#         return None
+async def get_session_from_academic(session_id: str) -> Optional[Dict[str, Any]]:
     try:
-        with httpx.Client(timeout=10.0) as client:
-            response = client.get(f"{ACADEMIC_SERVICE_URL}/class-sessions/{session_id}")
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.get(
+                f"{ACADEMIC_SERVICE_URL}/class-sessions/{session_id}"
+            )
             response.raise_for_status()
             return response.json()
     except httpx.HTTPError as e:
         print(f"Failed to get session from academic service: {e}")
         return None
 
-def get_class_from_academic(class_id: str) -> Optional[Dict[str, Any]]:
+# def get_class_from_academic(class_id: str) -> Optional[Dict[str, Any]]:
+#     """Lấy thông tin class từ Academic service"""
+#     try:
+#         with httpx.Client(timeout=10.0) as client:
+#             response = client.get(f"{ACADEMIC_SERVICE_URL}/classes/{class_id}")
+#             response.raise_for_status()
+#             return response.json()
+#     except httpx.HTTPError as e:
+#         print(f"Failed to get class from academic service: {e}")
+#         return None
+async def get_class_from_academic(class_id: str) -> Optional[Dict[str, Any]]:
     """Lấy thông tin class từ Academic service"""
     try:
-        with httpx.Client(timeout=10.0) as client:
-            response = client.get(f"{ACADEMIC_SERVICE_URL}/classes/{class_id}")
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.get(
+                f"{ACADEMIC_SERVICE_URL}/classes/{class_id}"
+            )
             response.raise_for_status()
             return response.json()
     except httpx.HTTPError as e:
         print(f"Failed to get class from academic service: {e}")
         return None
+
 
 
 

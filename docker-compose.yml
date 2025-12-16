@@ -1,0 +1,108 @@
+# Tệp docker-compose này khởi chạy cả frontend và backend.
+# Nó giả định rằng backend đang kết nối đến Supabase cloud.
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_app
+    ports:
+      - "8080:80"
+    restart: always
+    networks:
+      - my-network
+
+  gateway:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: gateway_service
+    restart: always
+    command: ["uvicorn", "gateway.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    networks:
+      - my-network
+    depends_on:
+      - auth
+      - users
+      - academic
+      - learning
+      - payment
+
+  auth:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: auth_service
+    restart: always
+    command: ["uvicorn", "auth.main:app", "--host", "0.0.0.0", "--port", "8001"]
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    networks:
+      - my-network
+
+  users:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: users_service
+    restart: always
+    command: ["uvicorn", "users.main:app", "--host", "0.0.0.0", "--port", "8002"]
+    ports:
+      - "8002:8002"
+    env_file:
+      - .env
+    networks:
+      - my-network
+
+  academic:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: academic_service
+    restart: always
+    command: ["uvicorn", "academic.main:app", "--host", "0.0.0.0", "--port", "8003"]
+    ports:
+      - "8003:8003"
+    env_file:
+      - .env
+    networks:
+      - my-network
+
+  learning:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: learning_service
+    restart: always
+    command: ["uvicorn", "learning.main:app", "--host", "0.0.0.0", "--port", "8004"]
+    ports:
+      - "8004:8004"
+    env_file:
+      - .env
+    networks:
+      - my-network
+
+  payment:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: payment_service
+    restart: always
+    command: ["uvicorn", "payment.main:app", "--host", "0.0.0.0", "--port", "8005"]
+    ports:
+      - "8005:8005"
+    env_file:
+      - .env
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

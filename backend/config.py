@@ -26,7 +26,7 @@ JWT_EXPIRE_MINUTES = int(os.getenv("JWT_EXPIRE_MINUTES", "60"))
 # ========================
 AUTH_SVC_URL: str = os.getenv("AUTH_SVC_URL", "http://localhost:8001")
 USER_SVC_URL: str = os.getenv("USER_SVC_URL", "http://localhost:8002")
-STUDENTFEE_SVC_URL: str = os.getenv("STUDENTFEE_SVC_URL", "http://localhost:8003")
+ACADEMIC_SVC_URL: str = os.getenv("ACADEMIC_SVC_URL", "http://localhost:8003")
 PAYMENT_SVC_URL: str = os.getenv("PAYMENT_SVC_URL", "http://localhost:8004")
 
 # ========================
@@ -49,7 +49,7 @@ def dump_config_safe():
         "JWT_EXPIRE_MINUTES": JWT_EXPIRE_MINUTES,
         "AUTH_SVC_URL": AUTH_SVC_URL,
         "USER_SVC_URL": USER_SVC_URL,
-        "STUDENTFEE_SVC_URL": STUDENTFEE_SVC_URL,
+        "ACADEMIC_SVC_URL": ACADEMIC_SVC_URL,
         "PAYMENT_SVC_URL": PAYMENT_SVC_URL,
         "MAIL_FROM": MAIL_FROM,
         "SMTP_HOST": SMTP_HOST,

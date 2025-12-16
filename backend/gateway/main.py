@@ -4,11 +4,11 @@ from fastapi.openapi.utils import get_openapi
 from starlette.responses import StreamingResponse
 import httpx
 
-AUTH_BASE = "http://localhost:8001/auth"
-USER_BASE = "http://localhost:8002/user"
-ACADEMIC_BASE = "http://localhost:8003/academic"
-LEARNING_BASE = "http://localhost:8004/learning"
-PAYMENT_BASE = "http://localhost:8005/payment"
+AUTH_BASE = "http://auth:8001/auth"
+USER_BASE = "http://users:8002/user"
+ACADEMIC_BASE = "http://academic:8003/academic"
+LEARNING_BASE = "http://learning:8004/learning"
+PAYMENT_BASE = "http://payment:8005/payment"
 
 
 
@@ -17,8 +17,9 @@ USER_FWD_PREFIX = "/user"   # "" nếu user-svc không prefix
 
 TIMEOUT_SECS = 30.0
 ALLOWED_ORIGINS = [
-    "http://localhost:5173", "http://127.0.0.1:5173",  # Vite
-    "http://localhost:3000", "http://127.0.0.1:3000",
+    "http://localhost:5173", "http://127.0.0.1:5173",  # Vite (phát triển)
+    "http://localhost:3000", "http://127.0.0.1:3000", # Một số môi trường dev khác
+    "http://localhost:8080", "http://127.0.0.1:8080", # Cổng frontend trong Docker
 ]
 
 app = FastAPI(

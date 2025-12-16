@@ -1,18 +1,50 @@
 # TutorConnect – Online Tutor Matching and Class Management System
 
-This project is a comprehensive online education platform designed to connect students with tutors and support an interactive learning environment. Students can search for tutors and submit course registration requests, while tutors review and select suitable class requests based on their expertise and availability. The system includes core functionalities such as user management, robust course and class management, an integrated e-learning module, payment processing, and a flexible learning environment that effectively supports both students and tutors.
+
+TutorConnect is a comprehensive online education platform designed to connect students with qualified tutors while supporting an interactive and flexible learning environment. The system allows students to search for tutors and submit class registration requests, while tutors can review, accept, and manage suitable class requests based on their expertise and availability.
+
+The platform integrates essential educational functionalities, including user management, course and class management, e-learning support, secure payment processing. TutorConnect aims to streamline the tutoring process and enhance learning experiences for both students and tutors.
 
 ## ✨ Key Features
 
--   **User Management:** Handles user registration, login, and role-based access control for `students` and `tutors`.
--   **Tutor Search & Class Request:** Enables students to search for tutors and submit class requests, which are reviewed and accepted by tutors.
--   **E-learning Module:** Facilitates the delivery of educational content, tracking of student progress, and interactive learning experiences within the platform.
+-   **User Management:** Supports user registration, authentication, and role-based access control for `students` and `tutors`.
+-   **Tutor Search & Class Request:** Students can search for tutors based on subjects and submit class requests, which tutors can review and accept.
+-   **E-learning Module:** Provides learning materials, progress tracking, and interactive learning features within the platform.
+-   **Course & Class Management:** Enables tutors to manage courses, schedules, and enrolled students effectively.
+-   **Payment Processing:** Integrates a secure payment service to handle tuition fees and transactions.
 
--   **Payment Processing:** Integrates a payment gateway to handle tuition fees securely.
--   **CV Upload:** Allows users to upload and manage their personal CVs/resumes.
+## 🎬 Demo
 
-### 🎬 Application Preview
+### Student Class Request Form
+![Class Request Form](screenshots/class_request.png)  
+*Students submit tutoring requests by providing subject, grade level, preferred schedule, and expected budget.*
 
+---
+
+### Service Payment & Invoice
+![Payment](screenshots/payment.png)  
+*Students make payment for the tutor-matching service.*
+
+![Invoice](screenshots/invoice.png)  
+*An electronic invoice is automatically generated and sent to the student’s email after successful payment.*
+
+---
+
+### Tutor Class Selection
+![Tutor Class List](screenshots/select_class.png)  
+*Tutors browse available class requests and select suitable classes to teach.*
+
+---
+
+### Tutor Dashboard
+![Tutor Dashboard](screenshots/tutor_dashboard.png)  
+*Tutors manage accepted classes, track teaching schedules, and monitor their activities.*
+
+---
+
+### E-learning System
+![E-learning](screenshots/elearning.png)  
+*Integrated e-learning interface supporting online lessons and learning materials.*
 
 
 
@@ -41,44 +73,74 @@ This project is a comprehensive online education platform designed to connect st
     - `react-router-dom`: For managing page navigation.
 - **Interface**: A modern user interface built with React components.
 
-## 🚀 Setup and Launch
+### Containerization
 
-### Backend
+- **Technology**: Docker
+- **Orchestration**: Docker Compose
 
-1. **Install dependencies**:
-   - Navigate to the `backend` directory.
-   - Run the following command to install the required libraries:
-     ```bash
-     pip install -r requirements.txt
-     ```
+## 🚀 Quickstart
 
-2. **Run the services**:
-   - The backend is designed to run as individual microservices. You can run each service by navigating to its directory and running the `uvicorn` command. For example, to run the `auth` service:
-     ```bash
-     cd auth
-     uvicorn main:app --host 0.0.0.0 --port 8001
-     ```
-   - Do the same for the other services with their respective ports. The recommended way is to use the provided shell script.
-     ```bash
-     chmod +x start_all.sh
-     ./start_all.sh
-     ```
+This project is configured to run seamlessly using Docker and Docker Compose. This is the recommended way to get all services up and running.
 
-### Frontend
+### Prerequisites
 
-1. **Install dependencies**:
-   - Navigate to the `frontend` directory.
-   - Run the following command:
-     ```bash
-     npm install
-     ```
+-   [Docker](https://www.docker.com/get-started/)
+-   [Docker Compose](https://docs.docker.com/compose/install/)
 
-2. **Run the application**:
-   - After the installation is complete, run the following command to start the React application:
-     ```bash
-     npm run dev
-     ```
-   - The application will be available at `http://localhost:5173`.
+### Steps
+
+1.  **Create Environment File**
+
+    In the root directory of the project, create a file named `.env`. This file will hold all the necessary environment variables for the backend services. Copy the contents of the example below into your `.env` file and replace the placeholder values with your actual credentials.
+
+    ```env
+    # /<project-root>/.env
+
+    # Supabase config
+    SUPABASE_URL="YOUR_SUPABASE_URL"
+    SUPABASE_SERVICE_ROLE_KEY="YOUR_SUPABASE_KEY"
+
+    # JWT config
+    JWT_SECRET="your-very-secret-jwt-key-that-is-long-and-secure"
+    JWT_ALGORITHM="HS256"
+    JWT_EXPIRE_MINUTES="60"
+
+    # SMTP config for sending emails
+    MAIL_FROM="your-email@example.com"
+    SMTP_HOST="smtp.gmail.com"
+    SMTP_PORT="587"
+    SMTP_USER="your-gmail-username"
+    SMTP_PASS="your-gmail-app-password"
+
+    # Service endpoints (for Docker Compose, use the service names as hostnames)
+    AUTH_SVC_URL="http://auth:8001"
+    USER_SVC_URL="http://users:8002"
+    ACADEMIC_SVC_URL="http://academic:8003"
+    LEARNING_SVC_URL="http://learning:8004"
+    PAYMENT_SVC_URL="http://payment:8005"
+    ```
+
+2.  **Build and Run the Services**
+
+    Open your terminal in the root directory and run the following command. This will build the Docker images for the frontend and backend services and start them in the background.
+
+    ```bash
+    docker-compose up -d --build
+    ```
+
+3.  **Access the Application**
+
+    Once the containers are running, you can access the different parts of the system:
+    -   **Frontend Application**: [http://localhost:8080](http://localhost:8080)
+    -   **API Gateway (Swagger UI)**: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+4.  **Stopping the Application**
+
+    To stop all running services, use the following command:
+
+    ```bash
+    docker-compose down
+    ```
 
 ## 🏗️ System Architecture
 
