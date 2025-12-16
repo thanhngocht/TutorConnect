@@ -1,9 +1,10 @@
 # TutorConnect – Online Tutor Matching and Class Management System
 
+TutorConnect is a comprehensive online education platform designed to connect students with qualified tutors while supporting an interactive and flexible learning environment. Instead of directly selecting a tutor, students submit a tutoring request form specifying detailed information such as grade level, subject, learning schedule, and expected payment.
 
-TutorConnect is a comprehensive online education platform designed to connect students with qualified tutors while supporting an interactive and flexible learning environment. The system allows students to search for tutors and submit class registration requests, while tutors can review, accept, and manage suitable class requests based on their expertise and availability.
+Tutors can view available class requests, review the provided requirements, and accept suitable requests based on their expertise and availability. Once accepted, tutors can manage assigned classes and participate in the learning process through the platform.
 
-The platform integrates essential educational functionalities, including user management, course and class management, e-learning support, secure payment processing. TutorConnect aims to streamline the tutoring process and enhance learning experiences for both students and tutors.
+The system integrates essential educational functionalities, including user management, course and class management, e-learning support, and secure payment processing. TutorConnect aims to streamline the tutoring workflow, improve transparency between students and tutors, and enhance the overall learning experience for both parties.
 
 ## ✨ Key Features
 
